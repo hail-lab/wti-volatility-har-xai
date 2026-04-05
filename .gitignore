@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data & outputs (not tracked)
+data_raw/**
+data_interim/**
+data_final/**
+outputs/**
+
+# Logs
+log
+*.log
+
+# Models / cache
+*.pt
+*.pth
+*.pkl
+*.joblib
