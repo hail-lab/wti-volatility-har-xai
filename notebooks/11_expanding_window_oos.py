@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
+
+plt.rcParams.update({'font.size': 13, 'axes.titlesize': 13, 'axes.labelsize': 12,
+                     'xtick.labelsize': 11, 'ytick.labelsize': 11, 'legend.fontsize': 11})
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
@@ -163,9 +166,10 @@ def main():
     # Cumulative loss plot (squared)
     cum = diff_sq.cumsum()
     plt.figure(figsize=(10, 6))
-    plt.plot(cum, label="Cumulative Loss Diff (HAR - HAR+All)")
-    plt.axhline(0, linestyle="--")
+    plt.plot(cum, label="Cumulative Loss Diff (HAR $-$ HAR+All)")
+    plt.axhline(0, linestyle="--", color='gray')
     plt.title("Expanding Window: Cumulative Squared Error Difference\n(HAR vs HAR+All)")
+    plt.xlabel("Date")
     plt.ylabel("Cumulative Difference")
     plt.legend()
     plt.tight_layout()
