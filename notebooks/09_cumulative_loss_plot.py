@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+plt.rcParams.update({'font.size': 13, 'axes.titlesize': 13, 'axes.labelsize': 12,
+                     'xtick.labelsize': 11, 'ytick.labelsize': 11, 'legend.fontsize': 11})
+
 PRED_PATH = "outputs/preds/preds_vol_rv5.csv"  # use the significant target
 
 def main():
@@ -19,9 +22,10 @@ def main():
     cum_d = d.cumsum()
 
     plt.figure(figsize=(10,6))
-    plt.plot(cum_d, label="Cumulative Loss Difference (HAR - HAR+All)")
-    plt.axhline(0, linestyle="--")
-    plt.title("Cumulative Squared Error Difference\n(HAR vs HAR+All)")
+    plt.plot(cum_d, label="Cumulative Loss Difference (HAR $-$ HAR+All)")
+    plt.axhline(0, linestyle="--", color='gray')
+    plt.title("Cumulative Squared Error Difference\n(HAR vs HAR+All, Rolling Window)")
+    plt.xlabel("Date")
     plt.ylabel("Cumulative Difference")
     plt.legend()
     plt.tight_layout()
