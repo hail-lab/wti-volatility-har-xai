@@ -11,9 +11,13 @@ from xgboost import XGBRegressor
 
 import shap
 
+# Force a non-interactive backend to avoid Tk/Tcl thread shutdown issues on Windows
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+plt.rcParams.update({'font.size': 13, 'axes.titlesize': 13, 'axes.labelsize': 12,
+                     'xtick.labelsize': 11, 'ytick.labelsize': 11, 'legend.fontsize': 11})
 
 
 DATA_PATH = "data_final/master_daily.csv"
@@ -28,6 +32,7 @@ MIN_TRAIN_OBS = 750
 # Script runs both targets
 TARGETS = ["vol_rv5", "vol_abs"]
 
+# Only compute SHAP for this target (publication target)
 SHAP_TARGET = "vol_rv5"
 
 RANDOM_STATE = 42
@@ -198,6 +203,7 @@ def make_shap_explanations(df, features, target, tag="vol_rv5"):
 
     sample_n = min(800, len(X_train))
 
+    # Sample with an explicit RNG (future-proof; avoids NumPy global RNG warnings)
     rng = np.random.default_rng(RANDOM_STATE)
     sample_idx = rng.choice(X_train.index.to_numpy(), size=sample_n, replace=False)
     X_shap = X_train.loc[sample_idx]
